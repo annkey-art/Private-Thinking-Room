@@ -171,19 +171,28 @@
     }
 
     function consultAll() {
-      if (count >= 3) {
-        showGate();
-        return;
-      }
+  if (count >= 3) {
+    showGate();
+    return;
+  }
 
-      count++;
-      const output = document.getElementById("output");
-      output.innerHTML = "";
+  const q = getQuestion();
 
-      const roles = ["strategist", "rebel", "empath", "realist", "trickster", "observer"];
-      roles.forEach(role => {
-        output.innerHTML += `<div class="message">${getMessage(role, getQuestion())}</div>`;
-      });
+  if (!q || q === "this situation") {
+    alert("Write your question first.");
+    return;
+  }
+
+  count++;
+
+  const output = document.getElementById("output");
+  output.innerHTML = "";
+
+  const roles = ["strategist", "rebel", "empath", "realist", "trickster", "observer"];
+
+  roles.forEach(role => {
+    output.innerHTML += `<div class="message">${getMessage(role, q)}</div>`;
+  });
     }
 
     function choose(type) {
